@@ -60,8 +60,8 @@ while True:
 
     cv2.imshow('Webcam',img)
     cv2.waitKey(1)
-    if cv2.waitKey(1) == ord('q'):  # Íàæàòà êëàâèøà 'q'
-        break  # Âûõîä èç öèêëà
+    if cv2.waitKey(1) == ord('q'):  
+        break  
 
 cv2.destroyAllWindows()  # çàêðûòèå âñåõ îêîí ïîñëå âûõîäà èç öèêëà
 cap.release()  # îñâîáîæäåíèå ðåñóðñîâ âèäåîïîòîêà
