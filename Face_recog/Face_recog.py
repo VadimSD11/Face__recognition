@@ -9,12 +9,12 @@ path= 'Faces'
 images=[]
 classNames=[]
 myList=os.listdir(path)
-print(myList)
+#print(myList)
 for cl in myList:
     curImg=cv2.imread(f'{path}/{cl}')
     images.append(curImg)
     classNames.append(os.path.splitext(cl)[0])
-print (classNames)
+#print (classNames)
 
 def findEncodings(images):
     encodeList=[]
@@ -26,7 +26,7 @@ def findEncodings(images):
     return encodeList
 
 encodeListKnown=findEncodings(images)
-print("Encoding complete")
+#print("Encoding complete")
 
 cap = cv2.VideoCapture(0)
 
@@ -60,8 +60,8 @@ while True:
 
     cv2.imshow('Webcam',img)
     cv2.waitKey(1)
-    if cv2.waitKey(1) == ord('q'):  # Нажата клавиша 'q'
-        break  # Выход из цикла
+    if cv2.waitKey(1) == ord('q'):  # ГЌГ Г¦Г ГІГ  ГЄГ«Г ГўГЁГёГ  'q'
+        break  # Г‚Г»ГµГ®Г¤ ГЁГ§ Г¶ГЁГЄГ«Г 
 
-cv2.destroyAllWindows()  # закрытие всех окон после выхода из цикла
-cap.release()  # освобождение ресурсов видеопотока
+cv2.destroyAllWindows()  # Г§Г ГЄГ°Г»ГІГЁГҐ ГўГ±ГҐГµ Г®ГЄГ®Г­ ГЇГ®Г±Г«ГҐ ГўГ»ГµГ®Г¤Г  ГЁГ§ Г¶ГЁГЄГ«Г 
+cap.release()  # Г®Г±ГўГ®ГЎГ®Г¦Г¤ГҐГ­ГЁГҐ Г°ГҐГ±ГіГ°Г±Г®Гў ГўГЁГ¤ГҐГ®ГЇГ®ГІГ®ГЄГ 
