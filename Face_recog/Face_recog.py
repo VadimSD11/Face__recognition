@@ -63,5 +63,5 @@ while True:
     if cv2.waitKey(1) == ord('q'):  
         break  
 
-cv2.destroyAllWindows()  # çàêðûòèå âñåõ îêîí ïîñëå âûõîäà èç öèêëà
-cap.release()  # îñâîáîæäåíèå ðåñóðñîâ âèäåîïîòîêà
+cv2.destroyAllWindows()  
+cap.release()  
