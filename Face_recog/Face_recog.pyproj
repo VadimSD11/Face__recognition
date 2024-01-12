@@ -27,6 +27,7 @@
     <Folder Include="Faces\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Faces\ME.jpg" />
     <Content Include="reference.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
