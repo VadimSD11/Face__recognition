@@ -23,6 +23,7 @@
   <ItemGroup>
     <Compile Include="Emailservice.py" />
     <Compile Include="Face_recog.py" />
+    <Compile Include="MyGUI.py" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Faces\" />
