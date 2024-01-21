@@ -21,6 +21,7 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Emailservice.py" />
     <Compile Include="Face_recog.py" />
   </ItemGroup>
   <ItemGroup>

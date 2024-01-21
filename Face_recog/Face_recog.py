@@ -2,6 +2,7 @@ import face_recognition
 import os
 import datetime
 import cv2
+import Emailservice
 import numpy as np
 from deepface import DeepFace
 
@@ -13,7 +14,6 @@ path = 'Faces'
 images = []
 classNames = []
 myList = os.listdir(path)
-
 
 
 for cl in myList:
@@ -30,6 +30,7 @@ def findEncodings(images):
     return encodeList
 
 encodeListKnown = findEncodings(images)
+ppl=0 
 
 cap = cv2.VideoCapture(0)
 recoring=True
@@ -65,6 +66,8 @@ while True:
             cv2.rectangle(img, (x1, y1), (x2, y2), (0, 255, 0), 2)
             cv2.rectangle(img, (x1, y2 - 35), (x2, y2), (0, 255, 0), cv2.FILLED)
             cv2.putText(img, name, (x1 + 6, y2 - 6), cv2.FONT_HERSHEY_COMPLEX, 1, (255, 255, 255), 2)
+            mystring = name+" appeared"
+            Emailservice.email_alert("Hey",mystring,"VadimSD11@gmail.com")
 
             # Emotion and Age Detection
             if mood_enabled:
@@ -96,6 +99,8 @@ while True:
             cv2.rectangle(img, (x1, y1), (x2, y2), (0, 0, 255), 2)
             cv2.rectangle(img, (x1, y2 - 35), (x2, y2), (0, 0, 255), cv2.FILLED)
             cv2.putText(img, name, (x1 + 6, y2 - 6), cv2.FONT_HERSHEY_COMPLEX, 1, (255, 255, 255), 2)
+            Emailservice.email_alert("Hey","Somebody unknown appeared","VadimSD11@gmail.com")
+
             if mood_enabled:
                 try:
                     face_img = img[y1:y2, x1:x2]
@@ -142,3 +147,4 @@ while True:
 cv2.destroyAllWindows()
 out.release()
 cap.release()
+Emailservice.email_alert_video("Hey", "Video", "VadimSD11@gmail.com", video_filename)
