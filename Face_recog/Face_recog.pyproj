@@ -24,6 +24,7 @@
     <Compile Include="Emailservice.py" />
     <Compile Include="Face_recog.py" />
     <Compile Include="MyGUI.py" />
+    <Compile Include="SoundAlarm.py" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Faces\" />

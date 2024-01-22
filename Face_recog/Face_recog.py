@@ -3,6 +3,7 @@ from turtle import width
 import face_recognition
 import os
 import datetime
+import SoundAlarm
 import cv2
 import Emailservice
 import MyGUI
@@ -45,8 +46,13 @@ video_filename = f"video_{current_datetime.strftime('%Y%m%d_%H%M')}.mp4"
 # Open a new VideoWriter with the unique filename
 out = cv2.VideoWriter(video_filename, fourcc, 20, frame_size)
 
-face_recognition_enabled = True 
+face_recognition_enabled = False 
 mood_enabled=False
+movement_detection=False
+lk_params = dict(winSize=(15, 15), maxLevel=2, criteria=(cv2.TERM_CRITERIA_EPS | cv2.TERM_CRITERIA_COUNT, 10, 0.03))
+prev_gray = None
+prev_pts = None  # Initialize prev_pts
+
 
 while True:
     success, img = cap.read()
@@ -54,6 +60,34 @@ while True:
     imgS = cv2.cvtColor(imgS, cv2.COLOR_BGR2RGB)
     facesCurFrame = face_recognition.face_locations(imgS)
     encodeCurFrame = face_recognition.face_encodings(imgS, facesCurFrame)
+    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+
+    if prev_gray is None:
+        prev_gray = gray
+        continue
+
+    # Check if there are valid points for optical flow calculation
+    if prev_pts is not None and len(prev_pts) > 0:
+        # Calculate optical flow
+        flow, status, err = cv2.calcOpticalFlowPyrLK(prev_gray, gray, prev_pts, None, **lk_params)
+
+        # Select good points
+        good_new = flow[status == 1].reshape(-1, 2)
+        good_old = prev_pts[status == 1].reshape(-1, 2)
+
+        # Calculate the Euclidean distance between good points
+        distances = np.linalg.norm(good_new - good_old, axis=1)
+
+        # Check if the movement is too fast
+        if np.max(distances) > 500:
+            # Trigger an alarm or take any action
+            if movement_detection:
+                print("Movement detected!")
+                SoundAlarm.beep_alarm()
+
+    # Update prev_pts and prev_gray for the next iteration
+    prev_pts = cv2.goodFeaturesToTrack(prev_gray, maxCorners=100, qualityLevel=0.01, minDistance=10)
+    prev_gray = gray
 
     if face_recognition_enabled:
 
@@ -142,6 +176,8 @@ while True:
         break
     elif key == ord('r'):
         face_recognition_enabled = not face_recognition_enabled
+    elif key == ord('y'):
+        movement_detection = not movement_detection
     elif key==ord('t'):        
             mood_enabled=not mood_enabled
             if face_recognition_enabled ==False:
