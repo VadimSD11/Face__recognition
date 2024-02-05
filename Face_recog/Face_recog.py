@@ -10,7 +10,6 @@ import MyGUI
 import numpy as np
 from deepface import DeepFace
 
-
 email_gui = MyGUI.MyGUI()
 MyEmail = email_gui.return_email()  # Get the email from the GUI
 print(f"Email retrieved: {MyEmail}")
@@ -166,14 +165,16 @@ while True:
    
         
 
-            # # Emotion and Age Detection
-
 
 
     cv2.imshow('Webcam', img)
     key = cv2.waitKey(1)
     if key == ord('q'):
         break
+    elif key==ord('w'):
+        email_gui = MyGUI.MyGUI()
+        MyEmail = email_gui.return_email()  # Get the email from the GUI
+        print(f"Email retrieved: {MyEmail}")
     elif key == ord('r'):
         face_recognition_enabled = not face_recognition_enabled
     elif key == ord('y'):

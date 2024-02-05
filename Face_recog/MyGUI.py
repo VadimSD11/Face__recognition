@@ -23,6 +23,8 @@ class MyGUI:
 
         self.import_button = tk.Button(self.root, text="Import Faces", font=('Arial', 18), command=self.import_faces)
         self.import_button.pack(padx=10, pady=10)
+        self.label2 = tk.Label(self.root, text="'r' - face recognition on/off\n'y' - movement detection\n't'- mood analysis\n'w' - summon thi menu\n'q' - exit", font=('Arial', 12))
+        self.label2.place(x=155, y=310, height=100, width=180)
 
         self.root.mainloop()
 
