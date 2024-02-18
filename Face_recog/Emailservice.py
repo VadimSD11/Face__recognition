@@ -14,7 +14,7 @@ def email_alert(subject,body,to):
 
     
     user ="VadimSD11@gmail.com"
-    password="password"
+    password="lfxecrlwpddquykl"
     #replace passwrod with real apppasswordforgmail
     msg['from']=user
     server= smtplib.SMTP("smtp.gmail.com",587)
@@ -40,7 +40,7 @@ def email_alert_video(subject, body, to, video_filename):
     msg.attach(MIMEText(body, 'plain'))
 
     user = "VadimSD11@gmail.com"
-    password = "password"
+    password = "lfxecrlwpddquykl"
 
     # Send the email
     with smtplib.SMTP("smtp.gmail.com", 587) as server:
