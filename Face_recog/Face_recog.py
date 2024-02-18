@@ -185,6 +185,6 @@ while True:
                 mood_enabled==False
 
 cv2.destroyAllWindows()
+Emailservice.email_alert_video("Hey", "Video", MyEmail, video_filename)
 out.release()
 cap.release()
-Emailservice.email_alert_video("Hey", "Video", MyEmail, video_filename)
