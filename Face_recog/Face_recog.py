@@ -51,6 +51,7 @@ movement_detection=False
 lk_params = dict(winSize=(15, 15), maxLevel=2, criteria=(cv2.TERM_CRITERIA_EPS | cv2.TERM_CRITERIA_COUNT, 10, 0.03))
 prev_gray = None
 prev_pts = None  # Initialize prev_pts
+recognized_faces = set()
 
 
 while True:
@@ -94,7 +95,7 @@ while True:
         matches = face_recognition.compare_faces(encodeListKnown, encodeFace)
         faceDis = face_recognition.face_distance(encodeListKnown, encodeFace)
         matchIndex = np.argmin(faceDis)
-
+       
         if matches[matchIndex]:
             name = classNames[matchIndex].upper()
             y1, x2, y2, x1 = faceLoc
@@ -102,8 +103,12 @@ while True:
             cv2.rectangle(img, (x1, y1), (x2, y2), (0, 255, 0), 2)
             cv2.rectangle(img, (x1, y2 - 35), (x2, y2), (0, 255, 0), cv2.FILLED)
             cv2.putText(img, name, (x1 + 6, y2 - 6), cv2.FONT_HERSHEY_COMPLEX, 1, (255, 255, 255), 2)
-            mystring = name+" is here"
-            Emailservice.email_alert("Hey",mystring,MyEmail)
+            if name not in recognized_faces:  # Check if the face is not already recognized
+             recognized_faces.add(name)  # Add the face to the set of recognized faces
+             # Send email
+             mystring = f"{name} is here"
+             Emailservice.email_alert("Hey", mystring, MyEmail)
+
 
             # Emotion and Age Detection
             if mood_enabled:
