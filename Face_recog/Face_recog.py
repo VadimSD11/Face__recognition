@@ -33,7 +33,6 @@ def findEncodings(images):
     return encodeList
 
 encodeListKnown = findEncodings(images)
-ppl=0 
 
 cap = cv2.VideoCapture(0)
 recoring=True
